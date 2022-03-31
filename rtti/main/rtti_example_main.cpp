@@ -11,7 +11,8 @@
 #include <memory>
 #include <vector>
 #include <algorithm>
-#include <cxxabi.h>
+
+#include "demangle.h"
 
 using std::cout;
 using std::endl;
@@ -22,8 +23,6 @@ using std::make_shared;
 class Base;
 class DerivedA;
 class DerivedB;
-
-static string demangle(const char* name);
 
 class Base
 {
@@ -84,17 +83,4 @@ extern "C" void app_main()
     cout << "Example finished." << endl;
 }
 
-/* Helper function which converts typeid().name() to a human-readable type name */
-static std::string demangle(const char* name)
-{
-    int status = 0;
-    char* result = abi::__cxa_demangle(name, NULL, NULL, &status);
-    string str_result;
-    if (status == 0) {
-        str_result = result;
-    } else {
-        str_result = name;
-    }
-    free(result);
-    return str_result;
-}
+
