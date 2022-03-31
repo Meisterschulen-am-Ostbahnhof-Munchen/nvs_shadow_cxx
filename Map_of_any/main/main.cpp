@@ -2,11 +2,29 @@
 #include <map>
 #include <string>
 #include <any>
+#include <typeinfo>
+#include <typeindex>
+#include <unordered_map>
 
 #include "demangle.h"
 
 using std::cout;
 using std::endl;
+
+
+
+
+typedef void (*ScriptFunction)(void); // function pointer type
+
+
+void ScriptFunction_string(void){
+    cout << "ScriptFunction_string" << endl;
+}
+
+
+void ScriptFunction_int(void){
+    cout << "ScriptFunction_int" << endl;
+}
 
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
@@ -17,6 +35,11 @@ extern "C" void app_main(void)
 
 
     std::map<std::string, std::any> notebook;
+    std::unordered_map<std::type_index, ScriptFunction> script_map;
+
+
+    script_map[std::type_index(typeid(std::string))] = ScriptFunction_string;
+    script_map[std::type_index(typeid(int))]         = ScriptFunction_int;
 
     std::string name{ "Pluto" };
     int year = 2015;
@@ -39,6 +62,9 @@ extern "C" void app_main(void)
 	int year2 = std::any_cast<int>(born); // = 2015
 
 
+
+	script_map[std::type_index(petName.type())]();
+	script_map[std::type_index(born.type())]();
 
 
     cout << "app_main done" << endl;
