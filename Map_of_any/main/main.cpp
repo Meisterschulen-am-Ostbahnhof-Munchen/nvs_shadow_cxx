@@ -3,6 +3,8 @@
 #include <string>
 #include <any>
 
+#include "demangle.h"
+
 using std::cout;
 using std::endl;
 
@@ -22,8 +24,19 @@ extern "C" void app_main(void)
     notebook["PetName"] = name;
     notebook["Born"] = year;
 
-    std::string name2 = std::any_cast<std::string>(notebook["PetName"]); // = "Pluto"
-    int year2 = std::any_cast<int>(notebook["Born"]); // = 2015
+
+
+
+    auto petName = notebook["PetName"];
+    cout << "typeid(petName).name() is: " << demangle(petName.type().name()) << endl;
+	std::string name2 = std::any_cast<std::string>(petName); // = "Pluto"
+
+    cout << "typeid(std::string).name() is: " << demangle(typeid(std::string).name()) << endl;
+
+
+	auto born = notebook["Born"];
+    cout << "typeid(born).name() is: " << demangle(born.type().name()) << endl;
+	int year2 = std::any_cast<int>(born); // = 2015
 
 
 
