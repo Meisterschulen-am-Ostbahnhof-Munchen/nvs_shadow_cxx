@@ -19,6 +19,18 @@ protected:
 public :
 
     static void init(void);
+
+    static int8_t preloadS8(const char section[], const char key[], const int8_t defaultValue);
+    static int16_t preloadS16(const char section[], const char key[], const int16_t defaultValue);
+    static int32_t preloadS32(const char section[], const char key[], const int32_t defaultValue);
+    static int64_t preloadS64(const char section[], const char key[], const int64_t defaultValue);
+    static uint8_t preloadU8(const char section[], const char key[], const uint8_t defaultValue);
+    static uint16_t preloadU16(const char section[], const char key[], const uint16_t defaultValue);
+    static uint32_t preloadU32(const char section[], const char key[], const uint32_t defaultValue);
+    static uint64_t preloadU64(const char section[], const char key[], const uint64_t defaultValue);
+    static uint64_t preloadX64(const char section[], const char key[], const uint64_t defaultValue);
+    static size_t preloadString(const char section[], const char key[], const char defaultValue[], char captionOut[], size_t size);
+
     static int8_t getS8(const char section[], const char key[], const int8_t defaultValue);
     static int16_t getS16(const char section[], const char key[], const int16_t defaultValue);
     static int32_t getS32(const char section[], const char key[], const int32_t defaultValue);
@@ -29,6 +41,7 @@ public :
     static uint64_t getU64(const char section[], const char key[], const uint64_t defaultValue);
     static uint64_t getX64(const char section[], const char key[], const uint64_t defaultValue);
     static size_t getString(const char section[], const char key[], const char defaultValue[], char captionOut[], size_t size);
+
     static void setS8(const char section[], const char key[], const int8_t value);
     static void setS16(const char section[], const char key[], const int16_t value);
     static void setS32(const char section[], const char key[], const int32_t value);

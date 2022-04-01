@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <string>
 #include <cstring>
+#include <map>
+#include <any>
 
 #include "settingsNVSinternal.h"
 #include "settingsNVS.h"
@@ -34,9 +36,11 @@ static const char * const TAG = "settings";
 struct Settings::Impl
 {
 	static nvs_handle_t my_handle;
+	static std::map<std::string, std::any> shadow_memory;
 };
 
 nvs_handle_t Settings::Impl::my_handle;
+std::map<std::string, std::any> Settings::Impl::shadow_memory;
 
 
 void Settings::init(void)
@@ -66,7 +70,7 @@ void Settings::init(void)
 
 
 
-int8_t Settings::getS8(const char section[], const char key[], const int8_t defaultValue)
+int8_t Settings::preloadS8(const char section[], const char key[], const int8_t defaultValue)
 {
 	int8_t value;
 	esp_err_t error = nvs_get_i8(Impl::my_handle, key, &value);
@@ -79,7 +83,7 @@ int8_t Settings::getS8(const char section[], const char key[], const int8_t defa
 	return (value);
 }
 
-int16_t Settings::getS16(const char section[], const char key[], const int16_t defaultValue)
+int16_t Settings::preloadS16(const char section[], const char key[], const int16_t defaultValue)
 {
 	int16_t value;
 	esp_err_t error = nvs_get_i16(Impl::my_handle, key, &value);
@@ -92,7 +96,7 @@ int16_t Settings::getS16(const char section[], const char key[], const int16_t d
 	return (value);
 }
 
-int32_t Settings::getS32(const char section[], const char key[], const int32_t defaultValue)
+int32_t Settings::preloadS32(const char section[], const char key[], const int32_t defaultValue)
 {
 	int32_t value;
 	esp_err_t error = nvs_get_i32(Impl::my_handle, key, &value);
@@ -105,7 +109,7 @@ int32_t Settings::getS32(const char section[], const char key[], const int32_t d
 	return (value);
 }
 
-int64_t Settings::getS64(const char section[], const char key[], const int64_t defaultValue)
+int64_t Settings::preloadS64(const char section[], const char key[], const int64_t defaultValue)
 {
 	int64_t value;
 	esp_err_t error = nvs_get_i64(Impl::my_handle, key, &value);
@@ -118,7 +122,7 @@ int64_t Settings::getS64(const char section[], const char key[], const int64_t d
 	return (value);
 }
 
-uint8_t Settings::getU8(const char section[], const char key[], const uint8_t defaultValue)
+uint8_t Settings::preloadU8(const char section[], const char key[], const uint8_t defaultValue)
 {
 	uint8_t value;
 	esp_err_t error = nvs_get_u8(Impl::my_handle, key, &value);
@@ -131,7 +135,7 @@ uint8_t Settings::getU8(const char section[], const char key[], const uint8_t de
 	return (value);
 }
 
-uint16_t Settings::getU16(const char section[], const char key[], const uint16_t defaultValue)
+uint16_t Settings::preloadU16(const char section[], const char key[], const uint16_t defaultValue)
 {
 	uint16_t value;
 	esp_err_t error = nvs_get_u16(Impl::my_handle, key, &value);
@@ -144,7 +148,7 @@ uint16_t Settings::getU16(const char section[], const char key[], const uint16_t
 	return (value);
 }
 
-uint32_t Settings::getU32(const char section[], const char key[], const uint32_t defaultValue)
+uint32_t Settings::preloadU32(const char section[], const char key[], const uint32_t defaultValue)
 {
 	uint32_t value;
 	esp_err_t error = nvs_get_u32(Impl::my_handle, key, &value);
@@ -157,7 +161,7 @@ uint32_t Settings::getU32(const char section[], const char key[], const uint32_t
 	return (value);
 }
 
-uint64_t Settings::getU64(const char section[], const char key[], const uint64_t defaultValue)
+uint64_t Settings::preloadU64(const char section[], const char key[], const uint64_t defaultValue)
 {
 	uint64_t value;
 	esp_err_t error = nvs_get_u64(Impl::my_handle, key, &value);
@@ -170,7 +174,7 @@ uint64_t Settings::getU64(const char section[], const char key[], const uint64_t
 	return (value);
 }
 
-uint64_t Settings::getX64(const char section[], const char key[], const uint64_t defaultValue)
+uint64_t Settings::preloadX64(const char section[], const char key[], const uint64_t defaultValue)
 {
 	uint64_t value;
 	esp_err_t error = nvs_get_u64(Impl::my_handle, key, &value);
@@ -183,7 +187,7 @@ uint64_t Settings::getX64(const char section[], const char key[], const uint64_t
 	return (value);
 }
 
-size_t Settings::getString(const char section[], const char key[], const char defaultValue[], char captionOut[], size_t size)
+size_t Settings::preloadString(const char section[], const char key[], const char defaultValue[], char captionOut[], size_t size)
 {
 
 	esp_err_t error = nvs_get_str(Impl::my_handle, key, captionOut, &size);
@@ -303,7 +307,63 @@ void Settings::eraseString(const char section[], const char key[])
 
 
 
+/* ************************************************************************ */
 
+int8_t preloadS8(const char section[], const char key[], const int8_t defaultValue)
+{
+	return (Settings::preloadS8(section, key, defaultValue));
+}
+
+int16_t preloadS16(const char section[], const char key[], const int16_t defaultValue)
+{
+	return (Settings::preloadS16(section, key, defaultValue));
+}
+
+int32_t preloadS32(const char section[], const char key[], const int32_t defaultValue)
+{
+	return (Settings::preloadS32(section, key, defaultValue));
+}
+
+int64_t preloadS64(const char section[], const char key[], const int64_t defaultValue)
+{
+    return (Settings::preloadS64(section, key, defaultValue));
+}
+
+/* ************************************************************************ */
+
+uint8_t preloadU8(const char section[], const char key[], const uint8_t defaultValue)
+{
+	return (Settings::preloadU8(section, key, defaultValue));
+}
+
+uint16_t preloadU16(const char section[], const char key[], const uint16_t defaultValue)
+{
+	return (Settings::preloadU16(section, key, defaultValue));
+}
+
+uint32_t preloadU32(const char section[], const char key[], const uint32_t defaultValue)
+{
+	return (Settings::preloadU32(section, key, defaultValue));
+}
+
+uint64_t preloadU64(const char section[], const char key[], const uint64_t defaultValue)
+{
+	return (Settings::preloadU64(section, key, defaultValue));
+}
+
+/* ************************************************************************ */
+
+uint64_t preloadX64(const char section[], const char key[], const uint64_t defaultValue)
+{
+	return (Settings::preloadX64(section, key, defaultValue));
+}
+
+size_t preloadString(const char section[], const char key[], const char defaultValue[], char caption[], size_t size)
+{
+	return (Settings::preloadString(section, key, defaultValue, caption, size));
+}
+
+/* ************************************************************************ */
 
 /* ************************************************************************ */
 

@@ -12,7 +12,17 @@
 extern "C" {
 #endif
 /* ************************************************************************ */
-
+	int8_t   preloadS8(const char section[], const char key[], const int8_t defaultValue);
+	int16_t  preloadS16(const char section[], const char key[], const int16_t defaultValue);
+	int32_t  preloadS32(const char section[], const char key[], const int32_t defaultValue);
+	int64_t  preloadS64(const char section[], const char key[], const int64_t defaultValue);
+	uint8_t  preloadU8(const char section[], const char key[], const uint8_t defaultValue);
+	uint16_t preloadU16(const char section[], const char key[], const uint16_t defaultValue);
+	uint32_t preloadU32(const char section[], const char key[], const uint32_t defaultValue);
+	uint64_t preloadU64(const char section[], const char key[], const uint64_t defaultValue);
+	uint64_t preloadX64(const char section[], const char key[], const uint64_t defaultValue);
+	size_t   preloadString(const char section[], const char key[], const char defaultValue[], char string[], size_t stringSize);
+/* ************************************************************************ */
     int8_t   getS8(const char section[], const char key[], const int8_t defaultValue);
     int16_t  getS16(const char section[], const char key[], const int16_t defaultValue);
     int32_t  getS32(const char section[], const char key[], const int32_t defaultValue);
