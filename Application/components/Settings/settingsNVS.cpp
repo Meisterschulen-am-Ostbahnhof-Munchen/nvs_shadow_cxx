@@ -68,7 +68,22 @@ void Settings::init(void)
 }
 
 
-
+int8_t Settings::getS8(const char section[], const char key[], const int8_t defaultValue)
+{
+	int8_t value;
+	std::any tmp = Impl::shadow_memory[key];
+	if (tmp.has_value())
+	{
+		value = std::any_cast<int8_t>(tmp);
+	}
+	else
+	{
+		Impl::shadow_memory[key] = defaultValue;
+		value = defaultValue;
+	}
+	ESP_LOGI(TAG, "getS8, section = %s, key = %s, value = %i", section, key, value);
+	return (value);
+}
 
 int8_t Settings::preloadS8(const char section[], const char key[], const int8_t defaultValue)
 {
@@ -79,7 +94,8 @@ int8_t Settings::preloadS8(const char section[], const char key[], const int8_t 
 		value = defaultValue;
 		Settings::setS8(section, key, value);
 	}
-	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %i", section, key, value);
+	Impl::shadow_memory[key] = value;
+	ESP_LOGI(TAG, "getS8, section = %s, key = %s, value = %i", section, key, value);
 	return (value);
 }
 
