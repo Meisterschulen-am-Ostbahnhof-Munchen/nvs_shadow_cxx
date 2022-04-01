@@ -29,7 +29,7 @@ extern "C" void app_main()
 
     int8_t r = -9;
     r = getS8("CF-A", "byte", r);
-    cout << "r = " << r << endl;
+    cout << "r = " << +r << endl;
 
 
     cout << "Example finished." << endl;
