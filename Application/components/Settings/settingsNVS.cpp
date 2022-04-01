@@ -322,7 +322,8 @@ void Settings::commitX64(const char section[], const char key[])
 void Settings::commitString(const char section[], const char key[])
 {
 	std::any tmp = Impl::shadow_memory[key];
-	std::string value = std::any_cast<std::string>(tmp);
+	std::string value_s = std::any_cast<std::string>(tmp);
+	const char* value = value_s.c_str();
 	ESP_LOGI(TAG, "setString, section = %s, key = %s, value = %s", section, key, value);
 	nvs_set_str(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
