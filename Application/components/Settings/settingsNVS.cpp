@@ -219,6 +219,12 @@ size_t Settings::preloadString(const char section[], const char key[], const cha
 	return (strlen(captionOut));
 }
 
+void Settings::setS8(const char section[], const char key[], const int8_t value)
+{
+	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %i", section, key, value);
+	Impl::shadow_memory[key] = value;
+}
+
 
 void Settings::commitS8(const char section[], const char key[])
 {
