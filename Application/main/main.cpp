@@ -27,11 +27,9 @@ extern "C" void app_main()
 	preloadS8("CF-A", "byte", 55);
 
 
-	int8_t q = -5;
-	setS8("CF-A", "byte", q);
     int8_t r = -9;
-
     r = getS8("CF-A", "byte", r);
+    cout << "r = " << r << endl;
 
 
     cout << "Example finished." << endl;
