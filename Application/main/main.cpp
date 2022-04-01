@@ -32,6 +32,17 @@ extern "C" void app_main()
     cout << "r = " << +r << endl;
 
 
+
+
+    int8_t z = -9;
+    z = getS8("CF-A", "123XXX123", 45);
+    cout << "z = " << +z << endl;
+
+
+    z = getS8("CF-A", "123XXX123", 12);
+    cout << "z = " << +z << endl;
+
+
     cout << "Example finished." << endl;
 }
 
