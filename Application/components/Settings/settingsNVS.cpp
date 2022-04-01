@@ -220,8 +220,10 @@ size_t Settings::preloadString(const char section[], const char key[], const cha
 }
 
 
-void Settings::setS8(const char section[], const char key[], const int8_t value)
+void Settings::commitS8(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	int8_t value = std::any_cast<int8_t>(tmp);
 	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %i", section, key, value);
 	nvs_set_i8(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -229,8 +231,10 @@ void Settings::setS8(const char section[], const char key[], const int8_t value)
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setS16(const char section[], const char key[], const int16_t value)
+void Settings::commitS16(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	int16_t value = std::any_cast<int16_t>(tmp);
 	ESP_LOGI(TAG, "setS16, section = %s, key = %s, value = %i", section, key, value);
 	nvs_set_i16(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -238,8 +242,10 @@ void Settings::setS16(const char section[], const char key[], const int16_t valu
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setS32(const char section[], const char key[], const int32_t value)
+void Settings::commitS32(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	int32_t value = std::any_cast<int32_t>(tmp);
 	ESP_LOGI(TAG, "setS32, section = %s, key = %s, value = %i", section, key, value);
 	nvs_set_i32(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -247,8 +253,10 @@ void Settings::setS32(const char section[], const char key[], const int32_t valu
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setS64(const char section[], const char key[], const int64_t value)
+void Settings::commitS64(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	int64_t value = std::any_cast<int64_t>(tmp);
 	ESP_LOGI(TAG, "setS64, section = %s, key = %s, value = %lli", section, key, value);
 	nvs_set_i64(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -256,8 +264,10 @@ void Settings::setS64(const char section[], const char key[], const int64_t valu
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setU8(const char section[], const char key[], const uint8_t value)
+void Settings::commitU8(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	uint8_t value = std::any_cast<uint8_t>(tmp);
 	ESP_LOGI(TAG, "setU8, section = %s, key = %s, value = %u", section, key, value);
 	nvs_set_u8(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -265,8 +275,10 @@ void Settings::setU8(const char section[], const char key[], const uint8_t value
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setU16(const char section[], const char key[], const uint16_t value)
+void Settings::commitU16(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	uint16_t value = std::any_cast<uint16_t>(tmp);
 	ESP_LOGI(TAG, "setU16, section = %s, key = %s, value = %u", section, key, value);
 	nvs_set_u16(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -274,8 +286,10 @@ void Settings::setU16(const char section[], const char key[], const uint16_t val
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setU32(const char section[], const char key[], const uint32_t value)
+void Settings::commitU32(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	uint32_t value = std::any_cast<uint32_t>(tmp);
 	ESP_LOGI(TAG, "setU32, section = %s, key = %s, value = %u", section, key, value);
 	nvs_set_u32(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -283,8 +297,10 @@ void Settings::setU32(const char section[], const char key[], const uint32_t val
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setU64(const char section[], const char key[], const uint64_t value)
+void Settings::commitU64(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	uint64_t value = std::any_cast<uint64_t>(tmp);
 	ESP_LOGI(TAG, "setU64, section = %s, key = %s, value = %llu", section, key, value);
 	nvs_set_u64(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -292,8 +308,10 @@ void Settings::setU64(const char section[], const char key[], const uint64_t val
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setX64(const char section[], const char key[], const uint64_t value)
+void Settings::commitX64(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	uint64_t value = std::any_cast<uint64_t>(tmp);
 	ESP_LOGI(TAG, "setX64, section = %s, key = %s, value = %llX", section, key, value);
 	nvs_set_u64(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -301,8 +319,10 @@ void Settings::setX64(const char section[], const char key[], const uint64_t val
 	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
-void Settings::setString(const char section[], const char key[], const char value[])
+void Settings::commitString(const char section[], const char key[])
 {
+	std::any tmp = Impl::shadow_memory[key];
+	std::string value = std::any_cast<std::string>(tmp);
 	ESP_LOGI(TAG, "setString, section = %s, key = %s, value = %s", section, key, value);
 	nvs_set_str(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
@@ -491,6 +511,64 @@ void setX64(const char section[], const char key[], const uint64_t value)
 void setString(const char section[], const char key[], const char value[])
 {
 	Settings::setString(section, key, value);
+}
+
+/* ************************************************************************ */
+
+/* ************************************************************************ */
+
+void commitS8(const char section[], const char key[])
+{
+	return (Settings::commitS8(section, key));
+}
+
+void commitS16(const char section[], const char key[])
+{
+	return (Settings::commitS16(section, key));
+}
+
+void commitS32(const char section[], const char key[])
+{
+	return (Settings::commitS32(section, key));
+}
+
+void commitS64(const char section[], const char key[])
+{
+	return (Settings::commitS64(section, key));
+}
+
+/* ************************************************************************ */
+
+void commitU8(const char section[], const char key[])
+{
+	Settings::commitU8(section, key);
+}
+
+void commitU16(const char section[], const char key[])
+{
+	Settings::commitU16(section, key);
+}
+
+void commitU32(const char section[], const char key[])
+{
+	Settings::commitU32(section, key);
+}
+
+void commitU64(const char section[], const char key[])
+{
+	Settings::commitU64(section, key);
+}
+
+/* ************************************************************************ */
+
+void commitX64(const char section[], const char key[])
+{
+	Settings::commitX64(section, key);
+}
+
+void commitString(const char section[], const char key[])
+{
+	Settings::commitString(section, key);
 }
 
 /* ************************************************************************ */

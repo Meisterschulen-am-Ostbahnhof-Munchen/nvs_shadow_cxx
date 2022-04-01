@@ -52,8 +52,20 @@ public :
     static void setU64(const char section[], const char key[], const uint64_t value);
     static void setX64(const char section[], const char key[], const uint64_t value);
     static void setString(const char section[], const char key[], const char value[]);
+
+
     static void eraseString(const char section[], const char key[]);
 
+    static void commitS8(const char section[], const char key[]);
+    static void commitS16(const char section[], const char key[]);
+    static void commitS32(const char section[], const char key[]);
+    static void commitS64(const char section[], const char key[]);
+    static void commitU8(const char section[], const char key[]);
+    static void commitU16(const char section[], const char key[]);
+    static void commitU32(const char section[], const char key[]);
+    static void commitU64(const char section[], const char key[]);
+    static void commitX64(const char section[], const char key[]);
+    static void commitString(const char section[], const char key[]);
 
 };
 

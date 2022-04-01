@@ -12,6 +12,9 @@
 extern "C" {
 #endif
 /* ************************************************************************ */
+
+	// Preload is Load from NVS to Shadow
+
 	int8_t   preloadS8(const char section[], const char key[], const int8_t defaultValue);
 	int16_t  preloadS16(const char section[], const char key[], const int16_t defaultValue);
 	int32_t  preloadS32(const char section[], const char key[], const int32_t defaultValue);
@@ -23,6 +26,9 @@ extern "C" {
 	uint64_t preloadX64(const char section[], const char key[], const uint64_t defaultValue);
 	size_t   preloadString(const char section[], const char key[], const char defaultValue[], char string[], size_t stringSize);
 /* ************************************************************************ */
+
+	// Get is Pure non-NVS reading. Only Shadow.
+
     int8_t   getS8(const char section[], const char key[], const int8_t defaultValue);
     int16_t  getS16(const char section[], const char key[], const int16_t defaultValue);
     int32_t  getS32(const char section[], const char key[], const int32_t defaultValue);
@@ -34,6 +40,9 @@ extern "C" {
     uint64_t getX64(const char section[], const char key[], const uint64_t defaultValue);
     size_t   getString(const char section[], const char key[], const char defaultValue[], char string[], size_t stringSize);
 /* ************************************************************************ */
+
+    // Set is Pure non-NVS Setting. Only Shadow.
+
     void setS8(const char section[], const char key[], const int8_t value);
     void setS16(const char section[], const char key[], const int16_t value);
     void setS32(const char section[], const char key[], const int32_t value);
@@ -44,6 +53,20 @@ extern "C" {
     void setU64(const char section[], const char key[], const uint64_t value);
     void setX64(const char section[], const char key[], const uint64_t value);
     void setString(const char section[], const char key[], const char value[]);
+/* ************************************************************************ */
+
+    //Commit is write from Shadow to NVS.
+
+    void commitS8(const char section[], const char key[]);
+    void commitS16(const char section[], const char key[]);
+    void commitS32(const char section[], const char key[]);
+    void commitS64(const char section[], const char key[]);
+    void commitU8(const char section[], const char key[]);
+    void commitU16(const char section[], const char key[]);
+    void commitU32(const char section[], const char key[]);
+    void commitU64(const char section[], const char key[]);
+    void commitX64(const char section[], const char key[]);
+    void commitString(const char section[], const char key[]);
 /* ************************************************************************ */
     void eraseString(const char section[], const char key[]);
 /* ************************************************************************ */
