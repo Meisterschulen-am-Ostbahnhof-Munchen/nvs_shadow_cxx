@@ -14,6 +14,13 @@ using std::endl;
 
 
 
+template<typename T>
+void ScriptFunction_T(T value){
+
+}
+
+
+
 typedef void (*ScriptFunction)(void); // function pointer type
 
 
