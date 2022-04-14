@@ -26,6 +26,7 @@ void ScriptFunction_int(void){
     cout << "ScriptFunction_int" << endl;
 }
 
+//Inspiration coming from: https://stackoverflow.com/questions/24702235/c-stdmap-holding-any-type-of-value
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
